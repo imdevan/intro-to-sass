@@ -1,0 +1,275 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css">
+		<link href="https://fonts.googleapis.com/css?family=Lora" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Montserrat|Roboto+Mono" rel="stylesheet">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+	</head>
+	<body>
+		<style>
+			body {
+				/*background: #333333;*/
+			}
+			code * {
+				font-family: 'Roboto Mono', monospace;
+			}
+			.lora * {
+				/*font-family: 'Lora', cursive !important;*/
+				font-family: 'Montserrat', sans-serif;
+			}
+			.reveal section .no-border {
+				border:none;
+				box-shadow: 0px 0px 0px rgba(0,0,0,0);
+			}
+			.left > * {
+				text-align: left;
+			}
+			.flex {
+				display: flex;
+				justify-content: space-between;
+			}
+			.w50 {
+				width: 50%;
+			}
+			h1, h2, h3, .pink {
+				color: #cf649a !important;
+			}
+			.white {
+				color: #333 !important;
+			}
+		</style>
+		<div class="reveal lora">
+			<div class="slides">
+				<section>
+						<h1>
+							Intro to Sass
+						</h1>
+						<a href="http//imdevan.com">Devan Huapaya</a>&nbsp;/&nbsp;
+						<a href="http://twitter.com/devanipsum">@devanIpsum</a>
+				</section>
+				<section>
+					<h1>what is sass?</h1>
+					<div class="fragment">
+						<p>
+							Syntactically Awesome Stylesheets
+						</p>
+						<p class="left">
+							<a href="http://sass-lang.com">sass-lang.com</a>
+						</p>
+					</div>
+				</section>
+				<section>
+					<h1>Things Sass Can Do</h1>
+					<ul>
+						<li>Variables</li>
+						<li>For Loops</li>
+						<li>Functions</li>
+						<li>Import Other Files</li>
+						<li>Data structures: lists, booleans, Maps</li>
+						<li>It's Turing Complete!</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Things Sass Can't Do (on it's own)</h1>
+					<ul>
+						<li>Load itself into a file</li>
+						<li>Run in Browser</li>
+						<li>Autoprefixing</li>
+						<li>Hotreloading</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+						<h1>Installation & Build Tools</h1>
+					</section>
+					<section class="left">
+						<h1>Gulp</h1>
+						<h1>Webpack</h1>
+						<h1>Wordpress</h1>
+						<h1>Code Pen</h1>
+					</section>
+					<section>
+						<h1>Gulp</h1>
+						<pre><code class="hljs">
+// Compile SCSS into CSS
+gulp.task('styles', function() {
+  return gulp.src('./assets/styles/style.scss')
+  .pipe(gulp.dest('./_site/assets/css'))
+  .pipe(sass())
+});
+						</code></pre>
+					</section>
+					<section>
+						<h1>Gulp</h1>
+						<pre><code class="hljs">
+// Compile SCSS into CSS & auto-inject into browsers
+gulp.task('styles', function() {
+  return gulp.src('./styles/style.scss')
+  .pipe(sass())
+  .pipe(autoprefixer({
+      browsers: ['last 2 versions']
+  }))
+  .pipe(nano({discardComments: {removeAll: true}}))
+  .pipe(gulp.dest('./_site/assets/css'))
+  .pipe(browserSync.stream());
+});
+						</code></pre>
+					</section>
+					<section>
+						<h1>Webpack</h1>
+						<pre><code class="hljs">
+...
+loaders: [
+  {
+    test: /\.scss$/,
+    loader: 'style!css!sass'
+  }
+]
+...
+						</code></pre>
+					</section>
+					<section>
+						<h1>Webpack</h1>
+						<pre><code class="hljs">
+...
+loaders: [
+  {
+    test: /\.scss$/,
+    loader: 'style!css?modules&importLoaders=2&sourceMap!
+        autoprefixer?browsers=last 2 version!sass?outputStyle=expanded&sourceMap'
+  }
+]
+...
+						</code></pre>
+					</section>
+					<section>
+						<h1>Wordpress</h1>
+						<h1><a href="https://www.elegantt	hemes.com/blog/tips-tricks/how-to-use-sass-with-wordpress-a-step-by-step-guide">
+							It is possible 😉
+						</a></h1>
+					</section>
+				</section>
+				<section >
+					<h1 class="white">Sass Basics</h1>
+					<div class="flex">
+						<div class="left w50">
+							<h3>Variables</h3>
+							<h3>Nesting</h3>
+							<h3>Ampersand</h3>
+							<h3>Media Queries</h3>
+							<h3>Mixins</h3>
+						</div>
+						<div class="left w50">
+							<h3>Maps & Loops</h3>
+							<h3>Math Operators</h3>
+							<h3>Color Functions</h3>
+							<h3>Importing</h3>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h1>Variables</h1>
+					<p data-height="500" data-theme-id="light" data-slug-hash="PWwVVb" data-default-tab="css,result" data-user="imdevan" data-embed-version="2" data-pen-title="Intro to Sass" class="codepen">See the Pen <a href="http://codepen.io/imdevan/pen/PWwVVb">Intro to Sass</a> by Devan Huapaya (<a href="http://codepen.io/imdevan">@imdevan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+					<h1>Nesting</h1>
+					<p data-height="500" data-theme-id="light" data-slug-hash="JEoxwq" data-default-tab="css,result" data-user="imdevan" data-embed-version="2" data-pen-title="Intro to Sass - Nesting" class="codepen">See the Pen <a href="http://codepen.io/imdevan/pen/JEoxwq/">Intro to Sass - Nesting</a> by Devan Huapaya (<a href="http://codepen.io/imdevan">@imdevan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+					<h1>Ampersand</h1>
+					<p data-height="500" data-theme-id="light" data-slug-hash="bgNzJr" data-default-tab="css,result" data-user="imdevan" data-embed-version="2" data-pen-title="Intro to Sass - Ampersand" class="codepen">See the Pen <a href="http://codepen.io/imdevan/pen/bgNzJr/">Intro to Sass - Ampersand</a> by Devan Huapaya (<a href="http://codepen.io/imdevan">@imdevan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+					<h1>Media Queries</h1>
+					<p data-height="500" data-theme-id="light" data-slug-hash="RKNdwG" data-default-tab="css,result" data-user="imdevan" data-embed-version="2" data-pen-title="Intro to Sass - Media Queries" class="codepen">See the Pen <a href="http://codepen.io/imdevan/pen/RKNdwG/">Intro to Sass - Media Queries</a> by Devan Huapaya (<a href="http://codepen.io/imdevan">@imdevan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+					<h1>Mixins</h1>
+					<p data-height="500" data-theme-id="light" data-slug-hash="egmXyw" data-default-tab="css,result" data-user="imdevan" data-embed-version="2" data-pen-title="Intro to Sass - Mixins" class="codepen">See the Pen <a href="http://codepen.io/imdevan/pen/egmXyw/">Intro to Sass - Mixins</a> by Devan Huapaya (<a href="http://codepen.io/imdevan">@imdevan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+					<h1>Maps & Loops</h1>
+					<p data-height="500" data-theme-id="light" data-slug-hash="ggpZwK" data-default-tab="html,result" data-user="imdevan" data-embed-version="2" data-pen-title="Intro to Sass - Maps & Loops" class="codepen">See the Pen <a href="http://codepen.io/imdevan/pen/ggpZwK/">Intro to Sass - Maps & Loops</a> by Devan Huapaya (<a href="http://codepen.io/imdevan">@imdevan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+					<h1>Math Operators</h1>
+					<p data-height="500" data-theme-id="light" data-slug-hash="pRvYJZ" data-default-tab="html,result" data-user="imdevan" data-embed-version="2" data-pen-title="Intro to Sass - Math Operators" class="codepen">See the Pen <a href="http://codepen.io/imdevan/pen/pRvYJZ/">Intro to Sass - Math Operators</a> by Devan Huapaya (<a href="http://codepen.io/imdevan">@imdevan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+					<h1>Color Functions</h1>
+					<p data-height="500" data-theme-id="light" data-slug-hash="xgbBZK" data-default-tab="html,result" data-user="imdevan" data-embed-version="2" data-pen-title="Intro to Sass -  Color Functions" class="codepen">See the Pen <a href="http://codepen.io/imdevan/pen/xgbBZK/">Intro to Sass -  Color Functions</a> by Devan Huapaya (<a href="http://codepen.io/imdevan">@imdevan</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+				</section>
+				<section>
+					<h1>Importing</h1>
+					<p>
+						Within Main.scss
+					</p>
+					<pre><code class="hljs">
+@import 'layout/flex';
+@import 'layout/grid';
+@import 'components/typography';
+@import 'components/buttons';
+@import 'utility/margins';
+@import 'utility/padding';
+					</code></pre>
+				</section>
+				<section>
+					<h1>More Resources</h1>
+					<ul class="resource-list">
+            <li><a href="http://sass-lang.com">Sass Website</a></li>
+            <li><a href="http://thesassway.com">The Sass Way Blog Resources</a></li>
+            <li><a href="http://torquemag.io/developers-guide-learning-sass-twenty-minutes-less/">Developers Guide to Sass</a></li>
+            <li><a href="http://sass-compatibility.github.io/">Sass Compatability</a></li>
+            <li><a href="http://sass-guidelin.es">Sass Guidelines</a></li>
+						<li><a href="https://una.im/slides-intro-to-sass">Una Kravets Intro to Sass	</a></li>
+          </ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
